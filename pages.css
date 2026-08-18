@@ -125,6 +125,15 @@ body{
 .formcard .thanks p{color:#c7d6ee}
 @media (max-width:560px){ .formcard{padding:24px 20px} }
 
+/* ── ROUTE CARDS (two/three-up option grid — used on company + contact pages) */
+.routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:22px 0}
+.route{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px}
+.route h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px;color:var(--pine);margin:0 0 8px;letter-spacing:-.3px}
+.route p{font-size:15.5px;color:var(--ink-soft);margin:0 0 12px}
+.route a.act{display:inline-block;font-size:15px;font-weight:700;color:var(--pine);text-decoration:none}
+.route a.act:hover{text-decoration:underline}
+.lede{font-size:17px;color:var(--ink-soft);margin:0 0 16px}
+
 /* ── FOOTER ──────────────────────────────────────────────── */
 .foot{margin:48px 0 34px;text-align:center;color:var(--ink-soft);font-size:13px;line-height:1.7}
 .foot .fb{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:18px;color:var(--pine);letter-spacing:-.4px;margin-bottom:4px}
