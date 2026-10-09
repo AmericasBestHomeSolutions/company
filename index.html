@@ -24,6 +24,11 @@
   .prop h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:21px;color:var(--pine);margin:8px 0 7px;letter-spacing:-.4px}
   .prop p{font-size:15.5px;color:var(--ink-soft);margin:0}
   .prop .go{display:inline-block;margin-top:13px;font-size:14.5px;font-weight:700;color:var(--pine)}
+  .oq{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:18px 0 4px}
+  .oq .q{background:var(--bg,#f7f9fc);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .oq .st{color:var(--honey);letter-spacing:2px;font-size:15px;margin-bottom:8px}
+  .oq p{margin:0 0 10px;font-size:15.5px;line-height:1.55}
+  .oq .nm{font-family:'DM Mono',monospace;font-size:12px;color:var(--ink-soft)}
 </style>
 </head>
 <body>
@@ -37,7 +42,7 @@
         <rect x="17.5" y="26" width="13" height="9" fill="#ffffff"/>
         <rect x="22" y="30" width="4" height="5" fill="#15315e"/>
       </svg>
-      <span class="bn">Americas Best Home Solutions<small>Wyoming LLC</small></span>
+      <span class="bn">Americas Best Home Solutions<small>LLC</small></span>
     </a>
     <nav class="topnav">
       <a href="/" aria-current="page">Company</a>
@@ -112,6 +117,29 @@
       <span class="go">Visitar el sitio →</span>
     </a>
   </div>
+
+  <!-- OWNER REVIEWS — real, Joe-approved only. Fed by reviews-owners.json (scripts/reviews_publish.py). Hidden until the first approved owner review. -->
+  <div class="prose" id="owner-reviews" hidden>
+    <h2>What property owners say</h2>
+    <p>Words from owners and partners who have worked with us to sell a property.</p>
+    <div class="oq" id="oq"></div>
+  </div>
+  <script>
+  (function(){
+    fetch("/reviews-owners.json",{cache:"no-cache"}).then(function(r){return r.ok?r.json():[]}).then(function(list){
+      if(!Array.isArray(list)||!list.length)return;
+      var box=document.getElementById("oq");
+      list.slice().reverse().forEach(function(v){
+        var q=document.createElement("div");q.className="q";
+        var s=document.createElement("div");s.className="st";s.textContent="\u2605".repeat(v.stars)+"\u2606".repeat(5-v.stars);s.setAttribute("aria-label",v.stars+" out of 5 stars");
+        var p=document.createElement("p");p.textContent="\u201C"+v.text+"\u201D";
+        var n=document.createElement("div");n.className="nm";n.textContent=v.name;
+        q.appendChild(s);q.appendChild(p);q.appendChild(n);box.appendChild(q);
+      });
+      document.getElementById("owner-reviews").hidden=false;
+    }).catch(function(){});
+  })();
+  </script>
 
   <div class="prose">
     <h2>How we operate</h2>
